@@ -27,8 +27,13 @@ describe('Barrels', function() {
         paths: {
           models: require('path').join(process.cwd(), 'test/fixtures/models')
         },
-        adapters: {
-          default: 'sails-memory',
+        connections: {
+          memory: {
+            adapter: 'sails-memory'
+          }
+        },
+        models: {
+          connection: 'memory',
         },
         session: {
           secret: 'santaClausDoesntExist'
