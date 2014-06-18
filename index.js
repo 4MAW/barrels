@@ -23,9 +23,8 @@ function doPopulateSails(done) {
   async.each(modelNames, function(modelName, nextModel) {
     var Model = sails.models[modelName];
     if (Model) {
-
       //Cleanup existing data in the model
-      Model.destroy(function(err) {
+      Model.destroy({}, function(err) {
 
         // Insert all items from the fixture in the model (in parallel using async)
         async.each(data[modelName], function(item, nextItem) {
