@@ -26,6 +26,13 @@ function doPopulateSails(done) {
       //Cleanup existing data in the model
       Model.destroy({}, function(err) {
 
+        if ( err && err.code === 'E_UNKNOWN' ) {
+          // This happens when trying to remove a Sails 0.10.0
+          // model with an association which hasn't a collection
+          // created yet.
+          err = null;
+        }
+
         // Insert all items from the fixture in the model (in parallel using async)
         async.each(data[modelName], function(item, nextItem) {
           if (err) {
